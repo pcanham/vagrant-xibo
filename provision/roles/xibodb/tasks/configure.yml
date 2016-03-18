@@ -1,0 +1,34 @@
+---
+- name: Copy over the db config file
+  copy: src=/var/www/openDCIM/db.inc.php-dist dest=/var/www/openDCIM/db.inc.php owner=root group=root mode=0644
+  tags:
+    - opendcim-conf
+- name: Setup DB Host in db.inc.php
+  lineinfile:
+    dest=/var/www/openDCIM/db.inc.php
+    regexp='$dbhost = \"localhost\";'
+    line='$dbhost = \"localhost\";'
+  tags:
+    - opendcim-conf
+- name: Setup DB Name in db.inc.php
+  lineinfile:
+    dest=/var/www/openDCIM/db.inc.php
+    regexp='$dbname = \"dcim\";'
+    line='$dbname = \"dcim\";'
+  tags:
+    - opendcim-conf
+- name: Setup DB Password in db.inc.php
+  lineinfile:
+    dest=/var/www/openDCIM/db.inc.php
+    regexp='$dbpass = \"dcim\";'
+    line='$dbpass = \"dcim\";'
+  tags:
+    - opendcim-conf
+- name: Setup DB locale in db.inc.php
+  lineinfile:
+    dest=/var/www/openDCIM/db.inc.php
+    regexp='$locale = "en_US";'
+    line='$locale = "en_GB";'
+  tags:
+    - opendcim-conf
+

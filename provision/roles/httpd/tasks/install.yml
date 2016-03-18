@@ -1,0 +1,14 @@
+---
+# httpd modules
+- name: Install HTTPD (yum)
+  yum: "name={{item}} state=present"
+  sudo: yes
+  with_items: [
+    "httpd",
+    "mod_ssl"
+  ]
+  tags:
+    - httpd
+  when: ansible_os_family  == "RedHat" or ansible_os_family  == "Centos"
+- name: Start the HTTPD service
+  action: service name=httpd state=started

@@ -1,0 +1,14 @@
+---
+- name: Creating mysql db for xibo-cms
+  mysql_db: db=xibodb
+            state=present
+  tags:
+    - xibodb
+- name: Creating mysql user for xibo-cms
+  mysql_user: name=xibousr
+              host="10.0.0.21"
+              password=12345
+              priv=xibodb.*:ALL
+              state=present
+  tags:
+    - xibodb

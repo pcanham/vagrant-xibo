@@ -1,0 +1,22 @@
+---
+# php modules
+- name: Install PHP (yum)
+  yum: "name={{item}} state=present"
+  sudo: yes
+  with_items: [
+    "php",
+    "php-mysql",
+    "php-mbstring",
+    "php-soap",
+    "php-gd",
+    "php-mcrypt",
+    "php-xml"
+  ]
+  tags:
+    - php
+  when: ansible_os_family  == "RedHat" or ansible_os_family  == "Centos"
+- name: restart httpd 
+  service: name=httpd state=restarted
+  tags:
+    - php
+  when: ansible_os_family  == "RedHat" or ansible_os_family  == "Centos"

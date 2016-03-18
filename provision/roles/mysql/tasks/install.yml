@@ -1,0 +1,32 @@
+---
+# MySQL modules
+## CentOS 7
+- name: Install MySQL (yum)
+  yum: "name={{item}} state=present"
+  sudo: yes
+  with_items: [
+    "mariadb",
+    "mariadb-server",
+    "MySQL-python"
+  ]
+  tags:
+    - mysql
+  when: ansible_os_family  == "RedHat" or ansible_os_family  == "Centos"
+- name: Start the MySQL service
+  action: service name=mariadb state=started
+  tags:
+    - mysql
+  when: ansible_os_family  == "RedHat" or ansible_os_family  == "Centos"
+## CentOS 6
+#- name: Install MySQL (yum)
+#  yum: "name={{item}} state=present"
+#  sudo: yes
+#  with_items: [
+#    "mysql",
+#    "mysql-server",
+#    "MySQL-python"
+#  ]
+#  when: ansible_os_family  == "RedHat" or ansible_os_family  == "Centos" and ansible_distribution_major_version == "6"
+#- name: Start the MySQL service
+#  action: service name=mysqld state=started
+#  when: ansible_os_family  == "RedHat" or ansible_os_family  == "Centos" and ansible_distribution_major_version == "6"

@@ -1,0 +1,46 @@
+---
+- name: Deploy basic security config for httpd
+  template:
+    src=roles/httpd/files/basicsecurity.conf
+    dest=/etc/httpd/conf.d/basicsecurity.conf
+    owner=root
+    group=root
+    mode=0644
+  tags:
+    - httpd-conf
+- name: Deploy notrace config for httpd
+  template:
+    src=roles/httpd/files/notrace.conf
+    dest=/etc/httpd/conf.d/notrace.conf
+    owner=root
+    group=root
+    mode=0644
+  tags:
+    - httpd-conf
+- name: Set httpd Server Token
+  lineinfile:
+    dest=/etc/httpd/conf/httpd.conf
+    regexp='^ServerTokens '
+    line='ServerTokens Prod'
+  tags:
+    - httpd-conf
+- name: Set httpd Server Signature
+  lineinfile:
+    dest=/etc/httpd/conf/httpd.conf
+    regexp='^ServerSignature '
+    line='ServerSignature Off'
+  tags:
+    - httpd-conf
+- name: Set Index options
+  lineinfile:
+    dest=/etc/httpd/conf/httpd.conf
+    regexp='Options Indexes '
+    line='Options -Indexes'
+  tags:
+    - httpd-conf
+  sudo: yes
+
+
+
+
+

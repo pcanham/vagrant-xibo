@@ -1,0 +1,23 @@
+---
+- name: Setup timezone in php.ini
+  lineinfile:
+    dest=/etc/php.ini
+    regexp='^;date.timezone ='
+    line='date.timezone = Europe/London'
+  tags:
+    - php-conf
+  sudo: yes
+- name: Disable expose_php in php.ini
+  lineinfile:
+    dest=/etc/php.ini
+    regexp='^expose_php '
+    line='expose_php = Off'
+  sudo: yes
+  tags:
+    - php-conf
+  sudo: yes
+- name: Install php.conf for httpd
+  template: src=roles/php/files/php.conf dest=/etc/httpd/conf.d/php.conf owner=root group=root mode=0644
+  tags:
+    - php-conf
+  sudo: yes

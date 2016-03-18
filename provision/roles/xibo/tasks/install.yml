@@ -1,0 +1,30 @@
+---
+- name: Download xibo-cms
+  get_url: >
+   url=https://github.com/xibosignage/xibo-cms/archive/1.7.6.tar.gz
+   dest=/usr/local/src/xibo-cms-1.7.6.tar.gz
+  tags:
+    - xibo-cms
+- name: Extract and install xibo-cms
+  unarchive: src=/usr/local/src/xibo-cms-1.7.6.tar.gz
+             dest=/var/www
+             copy=no
+             owner=apache
+             group=apache
+  tags:
+    - xibo-cms
+- name: Create symlink for xibo-cms
+  file: src=/var/www/xibo-cms-1.7.6
+        dest=/var/www/html/xibo
+        state=link
+        owner=apache
+        group=apache
+  tags:
+    - xibo-cms
+- name: Create xibo-cms library
+  file: path=/var/xibocms-media
+        state=directory
+        owner=apache
+        group=apache
+  tags:
+    - xibo-cms

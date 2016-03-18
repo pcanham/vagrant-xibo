@@ -1,0 +1,12 @@
+---
+## Ansible playbook for a CentOS 7 MySQL box
+##
+##
+- name: Install MySQL
+  hosts: localhost
+  user: vagrant
+  sudo: yes
+  gather_facts: yes
+  roles:
+    - { role: mysql, tags: "database" }
+    - { role: xibodb, tags: "database" }

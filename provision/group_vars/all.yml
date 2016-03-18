@@ -1,0 +1,5 @@
+---
+opendcim_db_host: 10.0.0.20
+opendcim_db_name: opendcim_db
+opendcim_db_user: webnode_usr_001
+opendcim_db_pass: webnode_pass_001

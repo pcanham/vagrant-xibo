@@ -1,0 +1,11 @@
+---
+## Ansible playbook for a CentOS 7 webnode box
+- name: Install httpd + php
+  hosts: localhost
+  user: vagrant
+  sudo: yes
+  gather_facts: yes
+  roles:
+    - { role: httpd, tags: "webnode" }
+    - { role: php, tags: "webnode" }
+    - { role: xibo, tags: "webnode" }
